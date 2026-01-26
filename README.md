@@ -2,10 +2,10 @@
 
 A lightweight, zero-setup **Physically Based Rendering (PBR)** texture viewer built with Three.js. Drop your maps in, adjust your studio lighting, and preview your materials instantly in the browser.
 
-[![GitHub Release](https://img.shields.io/github/v/release/the3minutenode/ComfyUI-Advanced-Installer)](https://github.com/the3minutenode/ComfyUI-Advanced-Installer/releases/latest)
-[![GitHub Release Date](https://img.shields.io/github/release-date/the3minutenode/ComfyUI-Advanced-Installer)](https://github.com/the3minutenode/ComfyUI-Advanced-Installer/releases/latest)
-[![GitHub last commit](https://img.shields.io/github/last-commit/the3minutenode/ComfyUI-Advanced-Installer)](https://github.com/the3minutenode/ComfyUI-Advanced-Installer/releases/latest)
-[![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/the3minutenode/ComfyUI-Advanced-Installer/total)](https://github.com/the3minutenode/ComfyUI-Advanced-Installer/releases/latest)
+[![GitHub Release](https://img.shields.io/github/v/release/the3minutenode/PBR-Viewer)](https://github.com/the3minutenode/PBR-Viewer/releases/latest)
+[![GitHub Release Date](https://img.shields.io/github/release-date/the3minutenode/PBR-Viewer)](https://github.com/the3minutenode/PBR-Viewer/releases/latest)
+[![GitHub last commit](https://img.shields.io/github/last-commit/the3minutenode/PBR-Viewer)](https://github.com/the3minutenode/PBR-Viewer/releases/latest)
+[![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/the3minutenode/PBR-Viewer/total)](https://github.com/the3minutenode/PBR-Viewer/releases/latest)
 [![Static Badge](https://img.shields.io/badge/ComfyOrg-blue)](https://github.com/Comfy-Org/ComfyUI)
 
 [![Discord](https://img.shields.io/discord/1431137394056233030?label=discord&logo=discord&logoColor=white)](https://discord.com/invite/wDn7cj68gm)

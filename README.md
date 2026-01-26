@@ -10,6 +10,8 @@ A lightweight, zero-setup **Physically Based Rendering (PBR)** texture viewer bu
 * **UV Tiling:** Test material repetition with 1x, 2x, 4x, and 8x scale options.
 * **High Fidelity:** Uses ACES Filmic tone mapping and anisotropic filtering for professional-grade visual output.
 
+![scrennshot](screenshot.png)
+
 ## 🛠️ Tech Stack
 
 * **Three.js** (WebGL Framework)
@@ -21,7 +23,8 @@ A lightweight, zero-setup **Physically Based Rendering (PBR)** texture viewer bu
 
 1. **Open the App:** Launch the `index.html` file in any modern web browser.
 2. **Load Textures:** Use the "Texture Inputs" panel to select your image files.
-3. **Adjust Look:** * **Left Click + Drag** to rotate the camera.
+3. **Adjust Look:**
+* **Left Click + Drag** to rotate the camera.
 * **Right Click + Drag** to pan.
 * **Scroll** to zoom.
 4. **Refine Lighting:** Use the "Studio Lighting" sliders to see how your roughness and normal maps react to light at different angles.

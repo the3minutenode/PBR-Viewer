@@ -2,6 +2,17 @@
 
 A lightweight, zero-setup **Physically Based Rendering (PBR)** texture viewer built with Three.js. Drop your maps in, adjust your studio lighting, and preview your materials instantly in the browser.
 
+[![GitHub Release](https://img.shields.io/github/v/release/the3minutenode/ComfyUI-Advanced-Installer)](https://github.com/the3minutenode/ComfyUI-Advanced-Installer/releases/latest)
+[![GitHub Release Date](https://img.shields.io/github/release-date/the3minutenode/ComfyUI-Advanced-Installer)](https://github.com/the3minutenode/ComfyUI-Advanced-Installer/releases/latest)
+[![GitHub last commit](https://img.shields.io/github/last-commit/the3minutenode/ComfyUI-Advanced-Installer)](https://github.com/the3minutenode/ComfyUI-Advanced-Installer/releases/latest)
+[![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/the3minutenode/ComfyUI-Advanced-Installer/total)](https://github.com/the3minutenode/ComfyUI-Advanced-Installer/releases/latest)
+[![Static Badge](https://img.shields.io/badge/ComfyOrg-blue)](https://github.com/Comfy-Org/ComfyUI)
+
+[![Discord](https://img.shields.io/discord/1431137394056233030?label=discord&logo=discord&logoColor=white)](https://discord.com/invite/wDn7cj68gm)
+[![Static Badge](https://img.shields.io/badge/discord-1280%20total-brightgreen?logo=discord&logoColor=white)](https://discord.com/invite/wDn7cj68gm)
+[![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UC8ZKAaWoHYLy58Y6dmypHqg?label=YouTube%20Subscribers)](https://www.youtube.com/@The3MinuteNode)
+[![YouTube Channel Views](https://img.shields.io/youtube/channel/views/UC8ZKAaWoHYLy58Y6dmypHqg?label=YouTube%20Views)](https://www.youtube.com/@The3MinuteNode)
+
 ## 🚀 Features
 
 * **Instant Preview:** Load Albedo, Normal, Roughness, and Metallic maps directly from your local drive.

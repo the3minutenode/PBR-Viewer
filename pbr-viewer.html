@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PBR Viewer | The 3-Minute Node</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.145.0/examples/js/controls/OrbitControls.js"></script>
+    <style>
+        :root {
+            --accent: #00d4ff; /* Cutting Edge Cyan */
+            --bg-panel: rgba(15, 15, 15, 0.95);
+            --border: #333;
+            --text-main: #ffffff;
+            --text-dim: #bbbbbb;
+        }
+
+        body { margin: 0; overflow: hidden; font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #050505; color: var(--text-main); }
+        
+        #ui-container {
+            position: absolute; top: 20px; left: 20px; z-index: 10;
+            background: var(--bg-panel); padding: 25px; border-radius: 12px;
+            width: 320px; border: 1px solid var(--border); max-height: 90vh; overflow-y: auto;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Branding Styles */
+        .brand-header { border-bottom: 2px solid var(--accent); margin-bottom: 20px; padding-bottom: 10px; }
+        .brand-header h1 { margin: 0; font-size: 22px; letter-spacing: -0.5px; color: var(--text-main); }
+        .brand-header span { color: var(--accent); font-weight: bold; }
+        
+        .section-title { 
+            font-size: 13px; font-weight: 800; color: var(--accent); 
+            text-transform: uppercase; letter-spacing: 1.5px; 
+            margin: 20px 0 12px 0; display: flex; align-items: center;
+        }
+        .section-title::after { content: ""; flex: 1; height: 1px; background: #333; margin-left: 10px; }
+
+        .input-group { margin-bottom: 15px; }
+        label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text-dim); }
+        
+        input[type="file"], select { 
+            width: 100%; font-size: 14px; background: #222; color: #fff; 
+            border: 1px solid #444; padding: 8px; border-radius: 6px; cursor: pointer;
+        }
+
+        input[type="range"] { 
+            width: 100%; cursor: pointer; accent-color: var(--accent); height: 8px; 
+        }
+
+        .row { display: flex; gap: 12px; }
+        .col { flex: 1; }
+
+        /* Links/Socials */
+        .brand-footer { margin-top: 30px; padding-top: 15px; border-top: 1px solid #333; }
+        .nav-link { 
+            display: inline-block; color: var(--accent); text-decoration: none; 
+            font-size: 13px; font-weight: bold; margin-right: 15px; transition: 0.2s;
+        }
+        .nav-link:hover { text-decoration: underline; color: white; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: #444; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <div id="ui-container">
+        <div class="brand-header">
+            <h1>PBR | THE <span>3-MINUTE</span> NODE</h1>
+        </div>
+
+        <div class="section-title">Texture Inputs</div>
+        <div class="input-group"><label>Base Color (Albedo)</label><input type="file" id="baseColor"></div>
+        <div class="input-group"><label>Normal Map</label><input type="file" id="normal"></div>
+        <div class="row">
+            <div class="col"><div class="input-group"><label>Roughness</label><input type="file" id="roughness"></div></div>
+            <div class="col"><div class="input-group"><label>Metallic</label><input type="file" id="metallic"></div></div>
+        </div>
+
+        <div class="section-title">Geometry</div>
+        <div class="row">
+            <div class="col">
+                <label>Preview Shape</label>
+                <select id="shapeSelect">
+                    <option value="sphere">Sphere</option>
+                    <option value="cube">Cube</option>
+                </select>
+            </div>
+            <div class="col">
+                <label>UV Tiling</label>
+                <select id="tilingSelect">
+                    <option value="1">1x Scale</option>
+                    <option value="2">2x Scale</option>
+                    <option value="4">4x Scale</option>
+                    <option value="8">8x Scale</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="section-title">Studio Lighting</div>
+        <div class="input-group">
+            <label>Light Rotation</label>
+            <input type="range" id="lightAngle" min="0" max="6.28" step="0.1" value="0.7">
+        </div>
+        <div class="input-group">
+            <label>Light Elevation</label>
+            <input type="range" id="lightHeight" min="-5" max="5" step="0.1" value="2">
+        </div>
+        <div class="input-group">
+            <label>Key Light Intensity</label>
+            <input type="range" id="lightIntensity" min="0" max="10" step="0.1" value="1.5">
+        </div>
+        <div class="input-group">
+            <label>Ambient Fill</label>
+            <input type="range" id="ambientIntensity" min="0" max="2" step="0.05" value="0.3">
+        </div>
+
+        <div class="brand-footer">
+            <a href="https://www.youtube.com/@The3MinuteNode" target="_blank" class="nav-link">YouTube</a>
+            <a href="https://discord.gg/wDn7cj68gm" target="_blank" class="nav-link">Discord</a>
+        </div>
+    </div>
+
+    <script>
+        let scene, camera, renderer, mesh, material, controls, mainLight, ambientLight;
+        let currentTiling = 1;
+
+        const geometries = {
+            sphere: new THREE.SphereGeometry(1, 128, 128),
+            cube: new THREE.BoxGeometry(1.2, 1.2, 1.2)
+        };
+
+        function init() {
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x050505);
+
+            camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 0, 3.5);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.2;
+            document.body.appendChild(renderer.domElement);
+
+            material = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.6, metalness: 0.1 });
+            mesh = new THREE.Mesh(geometries.sphere, material);
+            scene.add(mesh);
+
+            ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+            scene.add(ambientLight);
+
+            mainLight = new THREE.DirectionalLight(0xffffff, 1.5);
+            mainLight.position.set(2, 2, 2);
+            scene.add(mainLight);
+
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        function handleFile(event, type) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                new THREE.TextureLoader().load(e.target.result, (tex) => {
+                    tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+                    tex.repeat.set(currentTiling, currentTiling);
+                    tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+                    
+                    if (type === 'map') material.map = tex;
+                    if (type === 'normalMap') material.normalMap = tex;
+                    if (type === 'roughnessMap') material.roughnessMap = tex;
+                    if (type === 'metalnessMap') material.metalnessMap = tex;
+                    
+                    material.needsUpdate = true;
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+
+        const updateLightPos = () => {
+            const angle = parseFloat(document.getElementById('lightAngle').value);
+            const height = parseFloat(document.getElementById('lightHeight').value);
+            mainLight.position.x = Math.cos(angle) * 5;
+            mainLight.position.z = Math.sin(angle) * 5;
+            mainLight.position.y = height;
+        };
+
+        // Listeners
+        document.getElementById('baseColor').addEventListener('change', (e) => handleFile(e, 'map'));
+        document.getElementById('normal').addEventListener('change', (e) => handleFile(e, 'normalMap'));
+        document.getElementById('roughness').addEventListener('change', (e) => handleFile(e, 'roughnessMap'));
+        document.getElementById('metallic').addEventListener('change', (e) => handleFile(e, 'metalnessMap'));
+
+        document.getElementById('shapeSelect').addEventListener('change', (e) => {
+            mesh.geometry = geometries[e.target.value];
+        });
+
+        document.getElementById('tilingSelect').addEventListener('change', (e) => {
+            currentTiling = parseInt(e.target.value);
+            ['map', 'normalMap', 'roughnessMap', 'metalnessMap'].forEach(m => {
+                if(material[m]) material[m].repeat.set(currentTiling, currentTiling);
+            });
+        });
+
+        document.getElementById('lightAngle').addEventListener('input', updateLightPos);
+        document.getElementById('lightHeight').addEventListener('input', updateLightPos);
+        document.getElementById('lightIntensity').addEventListener('input', (e) => mainLight.intensity = e.target.value);
+        document.getElementById('ambientIntensity').addEventListener('input', (e) => ambientLight.intensity = e.target.value);
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        window.onload = init;
+    </script>
+</body>
+</html>

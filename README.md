@@ -22,12 +22,12 @@ A lightweight, zero-setup **Physically Based Rendering (PBR)** texture viewer bu
 ## 📖 How to Use
 
 1. **Open the App:** Launch the `pbr-viewer.html` file in any modern web browser.
-2. **Load Textures:** Use the "Texture Inputs" panel to select your image files.
+2. **Load Textures:** Use the `Texture Inputs` panel to select your image files.
 3. **Adjust Look:**
 * **Left Click + Drag** to rotate the camera.
 * **Right Click + Drag** to pan.
 * **Scroll** to zoom.
-4. **Refine Lighting:** Use the "Studio Lighting" sliders to see how your roughness and normal maps react to light at different angles.
+4. **Refine Lighting:** Use the `Studio Lighting` sliders to see how your roughness and normal maps react to light at different angles.
 
 ## 🌐 Connect
 
@@ -35,3 +35,4 @@ Created by **The 3-Minute Node**. Join our community for more CG tools and tutor
 
 * [YouTube](https://www.youtube.com/@The3MinuteNode)
 * [Discord](https://discord.gg/wDn7cj68gm)
+* [Support Our Mission](https://www.paypal.com/donate/?hosted_button_id=EF3QDPEWK359N)

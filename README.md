@@ -21,7 +21,7 @@ A lightweight, zero-setup **Physically Based Rendering (PBR)** texture viewer bu
 
 ## 📖 How to Use
 
-1. **Open the App:** Launch the `index.html` file in any modern web browser.
+1. **Open the App:** Launch the `pbr-viewer.html` file in any modern web browser.
 2. **Load Textures:** Use the "Texture Inputs" panel to select your image files.
 3. **Adjust Look:**
 * **Left Click + Drag** to rotate the camera.

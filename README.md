@@ -13,6 +13,8 @@ A lightweight, zero-setup **Physically Based Rendering (PBR)** texture viewer bu
 [![YouTube Channel Subscribers](https://img.shields.io/youtube/channel/subscribers/UC8ZKAaWoHYLy58Y6dmypHqg?label=YouTube%20Subscribers)](https://www.youtube.com/@The3MinuteNode)
 [![YouTube Channel Views](https://img.shields.io/youtube/channel/views/UC8ZKAaWoHYLy58Y6dmypHqg?label=YouTube%20Views)](https://www.youtube.com/@The3MinuteNode)
 
+⚠️ **Official Version:** This is the original repository. If you are viewing this on any account other than `the3minutenode`, it is a fork and may not be up to date or verified.
+
 ## 🚀 Features
 
 * **Instant Preview:** Load Albedo, Normal, Roughness, and Metallic maps directly from your local drive.

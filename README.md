@@ -6,7 +6,6 @@ A lightweight, zero-setup **Physically Based Rendering (PBR)** texture viewer bu
 [![GitHub Release Date](https://img.shields.io/github/release-date/the3minutenode/PBR-Viewer)](https://github.com/the3minutenode/PBR-Viewer/releases/latest)
 [![GitHub last commit](https://img.shields.io/github/last-commit/the3minutenode/PBR-Viewer)](https://github.com/the3minutenode/PBR-Viewer/releases/latest)
 [![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/the3minutenode/PBR-Viewer/total)](https://github.com/the3minutenode/PBR-Viewer/releases/latest)
-[![Static Badge](https://img.shields.io/badge/ComfyOrg-blue)](https://github.com/Comfy-Org/ComfyUI)
 
 ⚠️ **Official Version:** This is the original repository. If you are viewing this on any account other than `the3minutenode`, it is a fork and may not be up to date or verified.
 
